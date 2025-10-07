@@ -28,20 +28,12 @@ if [ ${#missing[@]} -ne 0 ]; then
   exit 1
 fi
 
-if [ -d "$BUILDROOT_DIR/.git" ]; then
-  echo "Verwende bestehendes Buildroot-Verzeichnis $BUILDROOT_DIR"
-  (
-    cd "$BUILDROOT_DIR"
-    git fetch --tags
-    git checkout "$BR_TAG"
-  )
-else
-  if [ -d "$BUILDROOT_DIR" ]; then
-    echo "Vorhandenes Verzeichnis $BUILDROOT_DIR ist unvollständig – entferne es."
-    rm -rf "$BUILDROOT_DIR"
-  fi
+if [ ! -d "$BUILDROOT_DIR" ]; then
   echo "Klone Buildroot $BR_TAG nach $BUILDROOT_DIR ..."
   git clone --branch "$BR_TAG" --depth 1 "$BR_REPO" "$BUILDROOT_DIR"
+else
+  echo "Verwende bestehendes Buildroot-Verzeichnis $BUILDROOT_DIR"
+  (cd "$BUILDROOT_DIR" && git fetch --tags && git checkout "$BR_TAG")
 fi
 
 SPLASH_SRC="$REPO_ROOT/docs/assets/splashscreen.png"
@@ -51,10 +43,7 @@ if [ -f "$SPLASH_SRC" ]; then
 fi
 
 echo "Übernehme CopyOS-Konfiguration und Overlays ..."
-mkdir -p "$BUILDROOT_DIR/board/copyos"
-rsync -a --delete "$TEMPLATE_ROOT/board/copyos/" "$BUILDROOT_DIR/board/copyos/"
-mkdir -p "$BUILDROOT_DIR/configs"
-rsync -a "$TEMPLATE_ROOT/configs/" "$BUILDROOT_DIR/configs/"
+rsync -a --delete "$TEMPLATE_ROOT/" "$BUILDROOT_DIR/"
 
 cd "$BUILDROOT_DIR"
 
