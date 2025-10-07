@@ -23,7 +23,7 @@ Wenn die Einrichtung nicht klappt oder Sie sich den kompletten Ablauf kopieren m
 ```bash
 sudo apt-get update && \
   sudo apt-get install -y build-essential git wget cpio unzip python3 libncurses5-dev rsync bc && \
-  git clone https://github.com/<your-org>/CopyOS.git && \
+  git clone https://github.com/studio-justin-braun/CopyOS.git && \
   cd CopyOS && \
   ./tools/copyos-build.sh
 ```
