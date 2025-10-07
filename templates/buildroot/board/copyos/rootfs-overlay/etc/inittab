@@ -1,0 +1,6 @@
+# CopyOS inittab
+::sysinit:/etc/init.d/rcS
+::respawn:/usr/local/bin/copyos-launcher
+::ctrlaltdel:/sbin/reboot
+::shutdown:/sbin/swapoff -a
+::shutdown:/sbin/umount -a -r

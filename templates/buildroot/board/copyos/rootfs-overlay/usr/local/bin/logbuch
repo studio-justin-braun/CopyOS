@@ -1,0 +1,8 @@
+#!/bin/sh
+LOG_DIR=/var/log/copyos
+LATEST=$(ls -1t "$LOG_DIR" 2>/dev/null | head -n 1)
+if [ -z "$LATEST" ]; then
+  echo "Keine Sicherungslogs gefunden." >&2
+  exit 1
+fi
+exec less "$LOG_DIR/$LATEST"

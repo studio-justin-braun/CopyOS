@@ -1,0 +1,2 @@
+#!/bin/sh
+exec lsblk -o NAME,SIZE,FSTYPE,MOUNTPOINT,LABEL,MODEL

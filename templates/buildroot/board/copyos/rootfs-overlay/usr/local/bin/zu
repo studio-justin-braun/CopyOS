@@ -1,0 +1,10 @@
+#!/bin/sh
+if [ $# -eq 0 ]; then
+  echo "Nutzung: zu <pfad>" >&2
+  exit 1
+fi
+cd "$1" 2>/dev/null || {
+  echo "Pfad nicht gefunden: $1" >&2
+  exit 1
+}
+exec /bin/sh
