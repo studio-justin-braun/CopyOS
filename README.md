@@ -16,3 +16,14 @@ Weitere Details zur Architektur, zum UI-Fluss und zu den Custom-Kommandos befind
 
 ## Status
 Dieses Repository enthält aktuell nur Dokumentation. Die beschriebenen Schritte ermöglichen es, CopyOS mit Buildroot zu bauen und anzupassen.
+
+## Schnellstart: Komplettes Build mit einem Befehl
+Wer CopyOS ohne manuelle `make menuconfig`-Schritte bauen möchte, nutzt das bereitgestellte Automationsskript:
+
+```bash
+git clone https://github.com/<your-org>/CopyOS.git
+cd CopyOS
+./tools/copyos-build.sh
+```
+
+Das Skript klont Buildroot (Standard: Version `2024.02.1`), kopiert die vorkonfigurierten CopyOS-Vorlagen und startet den Build mit der Anzahl an CPU-Kernen des Systems. Nach erfolgreichem Lauf liegen die Images unter `buildroot/output/images/`.
