@@ -43,7 +43,19 @@ if [ -f "$SPLASH_SRC" ]; then
 fi
 
 echo "Übernehme CopyOS-Konfiguration und Overlays ..."
-rsync -a --delete "$TEMPLATE_ROOT/" "$BUILDROOT_DIR/"
+# Stelle sicher, dass der Zielordner existiert, bevor einzelne Komponenten
+# kopiert werden. Wir vermeiden dabei ein flächendeckendes --delete am
+# Buildroot-Stamm, damit die Buildroot-Makefiles erhalten bleiben.
+mkdir -p "$BUILDROOT_DIR/board"
+mkdir -p "$BUILDROOT_DIR/configs"
+
+# Synchronisiere ausschließlich den CopyOS-Board-Overlay.
+rsync -a --delete "$TEMPLATE_ROOT/board/copyos/" \
+  "$BUILDROOT_DIR/board/copyos/"
+
+# Installiere die CopyOS-Defconfig gezielt ins Buildroot-Configs-Verzeichnis.
+install -D -m 0644 "$TEMPLATE_ROOT/configs/copyos_defconfig" \
+  "$BUILDROOT_DIR/configs/copyos_defconfig"
 
 cd "$BUILDROOT_DIR"
 
