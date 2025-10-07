@@ -1,0 +1,10 @@
+#!/bin/sh
+cat <<'TXT'
+CopyOS Befehlsübersicht:
+  zeig [pfad]        – Listet Dateien übersichtlich auf.
+  zu <pfad>          – Wechselt in ein Verzeichnis und öffnet eine Shell dort.
+  laufwerke          – Zeigt erkannte Laufwerke und Partitionen.
+  sicherung-start    – Startet den geführten Sicherungsdialog.
+  hilfe              – Zeigt diesen Text an.
+  logbuch            – Öffnet das jüngste Sicherungsprotokoll.
+TXT
