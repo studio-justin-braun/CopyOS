@@ -12,10 +12,12 @@ Diese Anleitung führt durch den kompletten Prozess vom Aufsetzen des Buildroot-
 3. Optional: Für grafische Mockups `inkscape` und `gimp` installieren.
 
 ## 2. Automatischer Komplett-Build (empfohlen)
-Wer die vorkonfigurierte Umgebung ohne manuelle Menüs bauen möchte, nutzt das CopyOS-Automationsskript. Ein einziger Copy-&-Paste-Befehl richtet Buildroot ein, übernimmt Overlays und startet den Build:
+Wer die vorkonfigurierte Umgebung ohne manuelle Menüs bauen möchte, nutzt das CopyOS-Automationsskript. Der folgende Copy-&-Paste-Einzeiler installiert zunächst alle benötigten Pakete auf Debian/Ubuntu-Systemen, richtet Buildroot ein, übernimmt Overlays und startet den Build:
 
 ```bash
-git clone https://github.com/<your-org>/CopyOS.git && \
+sudo apt-get update && \
+  sudo apt-get install -y build-essential git wget cpio unzip python3 libncurses5-dev rsync bc && \
+  git clone https://github.com/<your-org>/CopyOS.git && \
   cd CopyOS && \
   ./tools/copyos-build.sh
 ```
